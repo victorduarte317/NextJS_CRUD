@@ -1,11 +1,15 @@
 module.exports = {
-  purge: [
-    './src/pages/**/*.{js,ts,jsx,tsx}',
-    './src/components/**/*.{js,ts,jsx,tsx}'
-  ],
-
-  darkMode: false, 
-  // content: [],
+  purge: {
+    content: [
+      './src/pages/**/*.{js,ts,jsx,tsx}',
+      './src/components/**/*.{js,ts,jsx,tsx}'
+    ],
+    safelist: [
+      /^bg-/,
+      /^to-/,
+      /^from-/
+    ]
+  },
   theme: {
     extend: {},
   },
