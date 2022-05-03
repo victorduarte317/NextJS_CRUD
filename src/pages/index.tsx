@@ -2,7 +2,8 @@ import Button from "../components/Button";
 import Layout from "../components/Layout";
 import Table from '../components/Table';
 import Client from '../core/Client';
-
+import Form from '../components/Form';
+import { useState } from "react";
 export default function Home() {
 
   const clients = [
@@ -20,6 +21,10 @@ export default function Home() {
     console.log(`Deleting ${client.name}`)
   }
 
+  function saveClient (client: Client) {
+    console.log(client)
+  }
+  const [visible, setVisible] = useState<'table' | 'form'>('table')
 
   return (
     <div className={`
@@ -28,17 +33,32 @@ export default function Home() {
       text-white
     `}>
       <Layout title='Registration'>
-        <div className='flex justify-end'>
-          <Button 
-            color='blue'
-            className="mb-4"
-          > New Client</Button>
-        </div>
+        {visible === 'table' ? (
+                  <>
+                  <div className='flex justify-end'>
+              
+                    <Button 
+                      color='green'
+                      className="mb-4"
+                      onClick={() => setVisible('form')}
+                    > New Client</Button>
+          
+                  </div>
+          
+                  <Table 
+                    clients={clients} 
+                    selectedClient={selectedClient}
+                    deletedClient={deletedClient}
+                  />
+              </>
+        ): (
 
-        <Table clients={clients} 
-          selectedClient={selectedClient}
-          deletedClient={deletedClient}
-        />
+          <Form 
+              client={clients[2]}
+              clientChange={saveClient}
+              canceled={() => setVisible('table')}
+            />
+        )}  
       </Layout>
     </div>
   )
