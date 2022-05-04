@@ -9,8 +9,8 @@ import firestore, {
   setDoc,
 } from 'firebase/firestore'
 
-import Client from '../../src/core/Client'
-import ClientRepository from '../../src/core/clientRepository'
+import Client from '../../core/Client'
+import ClientRepository from '../../core/clientRepository'
  
 export default class ClientCollection implements ClientRepository {
  
